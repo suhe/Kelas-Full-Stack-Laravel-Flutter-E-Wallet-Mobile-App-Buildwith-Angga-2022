@@ -25,7 +25,7 @@ class TransferRecentUserItem extends StatelessWidget {
         color: whiteColor,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             width: 45,
@@ -36,6 +36,37 @@ class TransferRecentUserItem extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: blackTextStyle.copyWith(
+                  fontSize: 16,
+                  fontWeight: medium,
+                ),
+              ),
+              SizedBox(height: 2),
+              Text(
+                '@${username.toString()}',
+                style: greyTextStyle.copyWith(fontSize: 12),
+              ),
+            ],
+          ),
+          Spacer(),
+          if (isVerified)
+            Row(
+              children: [
+                Icon(Icons.check_circle, color: greenColor, size: 14),
+                Text(
+                  "Verified",
+                  style: greenTextStyle.copyWith(
+                    fontSize: 11,
+                    fontWeight: medium,
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );
