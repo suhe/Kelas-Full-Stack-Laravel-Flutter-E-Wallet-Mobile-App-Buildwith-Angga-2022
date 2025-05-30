@@ -28,6 +28,12 @@ class TransferPage extends StatelessWidget {
           //if(textController.text = "")
           //buildRecentUsers(),
           buildResults(),
+          SizedBox(height: 274),
+          CustomFilledButton(
+            title: "Continue",
+            onPressed: () => (Navigator.pushNamed(context, "/transfer-amount")),
+          ),
+          SizedBox(height: 50),
         ],
       ),
     );
@@ -80,11 +86,20 @@ class TransferPage extends StatelessWidget {
           SizedBox(height: 14),
 
           Wrap(
+            spacing: 17,
+            runSpacing: 17,
             children: [
               TransferResultUserItem(
-                imageUrl: "assets/img_friend3.png",
-                name: "Masayoshi",
-                username: "form",
+                imageUrl: "assets/img_friend1.png",
+                name: "Yoana Jie",
+                username: "yunji",
+                isVerified: false,
+                isSelected: true,
+              ),
+              TransferResultUserItem(
+                imageUrl: "assets/img_friend2.png",
+                name: "Yoana Koe",
+                username: "ykoe",
                 isVerified: false,
               ),
             ],

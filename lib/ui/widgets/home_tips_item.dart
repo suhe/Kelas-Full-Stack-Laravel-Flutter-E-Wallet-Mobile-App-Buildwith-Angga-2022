@@ -18,9 +18,9 @@ class HomeTipsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        final Uri _url = Uri.parse(url);
-        if (await canLaunchUrl(_url)) {
-          launchUrl(_url);
+        final Uri uri = Uri.parse(url);
+        if (await canLaunchUrl(uri)) {
+          launchUrl(uri);
         }
       },
       child: Container(
