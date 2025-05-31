@@ -3,8 +3,16 @@ import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final emailController = TextEditingController(text: '');
+  final passwordController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +47,17 @@ class SignInPage extends StatelessWidget {
             child: Column(
               children: [
                 //NOTE:Email Input
-                CustomFormField(title: "Email Address"),
+                CustomFormField(
+                  title: "Email Address",
+                  controller: emailController,
+                ),
                 SizedBox(height: 16),
                 //NOTE:Password
-                CustomFormField(title: "Password", obscureText: true),
+                CustomFormField(
+                  title: "Password",
+                  obscureText: true,
+                  controller: passwordController,
+                ),
                 SizedBox(height: 8),
                 Align(
                   alignment: Alignment.centerRight,
