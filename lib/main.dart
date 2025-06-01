@@ -13,7 +13,6 @@ import 'package:bank_sha/ui/pages/profile_page.dart';
 import 'package:bank_sha/ui/pages/sign_in_page.dart';
 import 'package:bank_sha/ui/pages/sign_up_page.dart';
 import 'package:bank_sha/ui/pages/sign_up_set_ktp_page.dart';
-import 'package:bank_sha/ui/pages/sign_up_set_profile_page.dart';
 import 'package:bank_sha/ui/pages/sign_up_success_page.dart';
 import 'package:bank_sha/ui/pages/splash_page.dart';
 import 'package:bank_sha/ui/pages/topup_amount_page.dart';
@@ -56,7 +55,7 @@ class MyApp extends StatelessWidget {
           "/sign-in": (context) => SignInPage(),
           "/sign-up": (context) => SignUpPage(),
           //"/sign-up-set-profile": (context) => SignUpSetProfilePage(),
-          "/sign-up-set-ktp": (context) => SignUpSetKtpPage(),
+          //"/sign-up-set-ktp": (context) => SignUpSetKtpPage(),
           "/sign-up-success": (context) => SignUpSuccessPage(),
           "/home": (context) => HomePage(),
           "/profile": (context) => ProfilePage(),
