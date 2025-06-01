@@ -23,7 +23,8 @@ class _SignUpPageState extends State<SignUpPage> {
   bool validate() {
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
-        passwordController.text.isEmpty) {
+        passwordController.text.isEmpty ||
+        passwordController.text.length < 6) {
       return false;
     }
 

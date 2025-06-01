@@ -97,17 +97,7 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                             ),
                   ),
                 ),
-                /*Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage("assets/img_profile.png"),
-                    ),
-                  ),
-                ),*/
+
                 SizedBox(height: 16),
                 Text(
                   "Shayna Hanna",
@@ -142,7 +132,7 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                                   pin: pinController.text,
                                   profilePicture:
                                       selectedImage == null
-                                          ? null
+                                          ? ""
                                           : "data:image/png;base64," +
                                               base64Encode(
                                                 File(

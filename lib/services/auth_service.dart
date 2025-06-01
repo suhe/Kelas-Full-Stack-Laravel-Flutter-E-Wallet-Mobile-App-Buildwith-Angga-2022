@@ -1,6 +1,10 @@
 import 'dart:convert';
 
+import 'package:bank_sha/models/sign_in_form_model.dart';
+import 'package:bank_sha/models/sign_up_form_model.dart';
+import 'package:bank_sha/models/user_model.dart';
 import 'package:bank_sha/shared/shared_values.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
@@ -15,6 +19,55 @@ class AuthService {
         return jsonDecode(res.body)['is_email_exist'];
       } else {
         return jsonDecode(res.body)['errors'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<UserModel> register(SignUpFormModel data) async {
+    try {
+      debugPrint("json ${data.toJson()}");
+      final res = await http.post(
+        Uri.parse("$baseUrl/register"),
+        body: data.toJson(),
+        //body: jsonEncode(data.toJson()),
+        //headers: {'Content-Type': 'application/json'},
+      );
+
+      debugPrint("res code ${res.statusCode}");
+      debugPrint("res body ${res.body}");
+
+      if (res.statusCode == 200) {
+        UserModel user = UserModel.fromJson(jsonDecode(res.body));
+        user = user.copyWith(password: data.password);
+        return user;
+      } else {
+        throw jsonDecode(res.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<UserModel> login(SignInFormModel data) async {
+    try {
+      final res = await http.post(
+        Uri.parse("$baseUrl/login"),
+        body: data.toJson(),
+      );
+
+      debugPrint("res : ${res.body}");
+
+      if (res.statusCode == 200) {
+        UserModel user = UserModel.fromJson(jsonDecode(res.body));
+        user = user.copyWith(password: data.password);
+
+        //await storeCredentialToLocal(user);
+
+        return user;
+      } else {
+        throw jsonDecode(res.body)['message'];
       }
     } catch (e) {
       rethrow;
