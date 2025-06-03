@@ -1,5 +1,3 @@
-import 'package:bank_sha/shared/theme.dart';
-
 class UserModel {
   final int? id;
   final String? name;
@@ -50,6 +48,7 @@ class UserModel {
   }) => UserModel(
     id: id,
     username: username ?? this.username,
+    name: name ?? this.name,
     email: email ?? this.email,
     pin: pin ?? this.pin,
     password: password ?? this.password,
