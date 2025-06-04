@@ -1,12 +1,32 @@
+import 'package:bank_sha/blocs/user/user_bloc.dart';
+import 'package:bank_sha/models/user_model.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:bank_sha/ui/widgets/transfer_recent_user_item.dart';
 import 'package:bank_sha/ui/widgets/transfer_result_user_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TransferPage extends StatelessWidget {
+class TransferPage extends StatefulWidget {
   const TransferPage({super.key});
+
+  @override
+  State<TransferPage> createState() => _TransferPageState();
+}
+
+class _TransferPageState extends State<TransferPage> {
+  final usernameController = TextEditingController(text: '');
+  UserModel? selectedUser;
+
+  late UserBloc userBloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    userBloc = context.read<UserBloc>()..add(UserGetRecent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +44,40 @@ class TransferPage extends StatelessWidget {
             style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
           ),
           SizedBox(height: 14),
-          CustomFormField(title: "by username", isShowTitle: false),
-          //if(textController.text = "")
-          //buildRecentUsers(),
-          buildResults(),
-          SizedBox(height: 274),
-          CustomFilledButton(
-            title: "Continue",
-            onPressed: () => (Navigator.pushNamed(context, "/transfer-amount")),
+          CustomFormField(
+            title: "by username",
+            isShowTitle: false,
+            controller: usernameController,
+            onFieldSubmitted: (value) {
+              if (value.isNotEmpty) {
+                userBloc.add(UserGetByUsername(value));
+              } else {
+                userBloc.add(UserGetRecent());
+              }
+
+              setState(() {});
+            },
           ),
+          //if(textController.text = "")
+          usernameController.text.isEmpty ? buildRecentUsers() : buildResults(),
+          //buildResults(),
+
+          //SizedBox(height: 274),
           SizedBox(height: 50),
         ],
       ),
+      floatingActionButton:
+          selectedUser != null
+              ? Container(
+                margin: EdgeInsets.all(24),
+                child: CustomFilledButton(
+                  title: "Continue",
+                  onPressed:
+                      () => (Navigator.pushNamed(context, "/transfer-amount")),
+                ),
+              )
+              : Container(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
