@@ -1,18 +1,21 @@
+import 'package:bank_sha/models/user_model.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class TransferRecentUserItem extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final String username;
-  final bool isVerified;
+  final UserModel user;
+  //final String imageUrl;
+  //final String name;
+  //final String username;
+  //final bool isVerified;
 
   const TransferRecentUserItem({
     super.key,
-    required this.imageUrl,
-    required this.name,
-    required this.username,
-    required this.isVerified,
+    required this.user,
+    //required this.imageUrl,
+    //required this.name,
+    //required this.username,
+    //required this.isVerified,
   });
 
   @override
@@ -32,7 +35,12 @@ class TransferRecentUserItem extends StatelessWidget {
             height: 45,
             margin: EdgeInsets.only(right: 14),
             decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(imageUrl)),
+              image: DecorationImage(
+                image:
+                    user.profilePicture == null
+                        ? AssetImage("assets/img_profile.png")
+                        : NetworkImage(user.profilePicture!) as ImageProvider,
+              ),
               shape: BoxShape.circle,
             ),
           ),
@@ -40,7 +48,7 @@ class TransferRecentUserItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                user.name.toString(),
                 style: blackTextStyle.copyWith(
                   fontSize: 16,
                   fontWeight: medium,
@@ -48,13 +56,13 @@ class TransferRecentUserItem extends StatelessWidget {
               ),
               SizedBox(height: 2),
               Text(
-                '@${username.toString()}',
+                '@${user.username.toString()}',
                 style: greyTextStyle.copyWith(fontSize: 12),
               ),
             ],
           ),
           Spacer(),
-          if (isVerified)
+          if (user.verified == 1)
             Row(
               children: [
                 Icon(Icons.check_circle, color: greenColor, size: 14),

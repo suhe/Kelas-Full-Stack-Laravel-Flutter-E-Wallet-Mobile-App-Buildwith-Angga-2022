@@ -27,12 +27,12 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     id: json['id'],
-    name: json['name'] ?? '',
+    name: json['name'],
     email: json['email'] ?? '',
-    username: json['username'] ?? '',
-    verified: json['verified'] ?? '',
+    username: json['username'],
+    verified: json['verified'],
     profilePicture: json['profile_picture'] ?? '',
-    balance: json['balance'] ?? '',
+    balance: json['balance'],
     cardNumber: json['card_number'] ?? '',
     pin: json['pin'] ?? '',
     token: json['token'] ?? '',
