@@ -1,6 +1,8 @@
 import 'package:bank_sha/blocs/user/user_bloc.dart';
+import 'package:bank_sha/models/transfer_form_model.dart';
 import 'package:bank_sha/models/user_model.dart';
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/pages/transfer_amount_page.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:bank_sha/ui/widgets/transfer_recent_user_item.dart';
@@ -74,7 +76,20 @@ class _TransferPageState extends State<TransferPage> {
                 child: CustomFilledButton(
                   title: "Continue",
                   onPressed:
-                      () => (Navigator.pushNamed(context, "/transfer-amount")),
+                      () => {
+                        //(Navigator.pushNamed(context, "/transfer-amount"))
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => TransferAmountPage(
+                                  data: TransferFormModel(
+                                    sendTo: selectedUser!.username,
+                                  ),
+                                ),
+                          ),
+                        ),
+                      },
                 ),
               )
               : Container(),
@@ -100,7 +115,22 @@ class _TransferPageState extends State<TransferPage> {
                 return Column(
                   children:
                       state.users.map((user) {
-                        return TransferRecentUserItem(user: user);
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => TransferAmountPage(
+                                      data: TransferFormModel(
+                                        sendTo: user.username,
+                                      ),
+                                    ),
+                              ),
+                            );
+                          },
+                          child: TransferRecentUserItem(user: user),
+                        );
                       }).toList(),
                 );
               }
